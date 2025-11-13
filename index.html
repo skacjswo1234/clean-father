@@ -65,39 +65,31 @@
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 6px;
             padding: 8px 12px;
             border: 1px solid rgba(27,108,255,0.24);
             border-radius: 999px;
             background: rgba(27,108,255,0.08);
             color: var(--primary);
-            font-size: 14px;
-            font-weight: 600;
             cursor: pointer;
             transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+            font-size: 0;
+            margin-left: auto;
+            margin-right: clamp(4px, 1.6vw, 14px);
         }
-        .menu-toggle span {
-            display: block;
-            width: 18px;
-            height: 2px;
-            background: currentColor;
-            position: relative;
+        .menu-toggle__icon {
+            font-size: 22px;
+            line-height: 1;
         }
-        .menu-toggle span::before,
-        .menu-toggle span::after {
-            content: '';
+        .sr-only {
             position: absolute;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: currentColor;
-            transition: transform 0.2s ease;
-        }
-        .menu-toggle span::before {
-            top: -6px;
-        }
-        .menu-toggle span::after {
-            top: 6px;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
         .menu-toggle:hover {
             background: rgba(27,108,255,0.16);
@@ -105,15 +97,7 @@
         }
         .menu-toggle[aria-expanded="true"] {
             background: rgba(27,108,255,0.24);
-        }
-        .menu-toggle[aria-expanded="true"] span {
-            background: transparent;
-        }
-        .menu-toggle[aria-expanded="true"] span::before {
-            transform: translateY(6px) rotate(45deg);
-        }
-        .menu-toggle[aria-expanded="true"] span::after {
-            transform: translateY(-6px) rotate(-45deg);
+            border-color: rgba(27,108,255,0.32);
         }
         .site-nav {
             display: flex;
@@ -309,6 +293,7 @@
             font-size: clamp(14px, 2.6vw, 18px);
             box-shadow: 0 12px 24px rgba(27,108,255,0.35);
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            white-space: nowrap;
         }
         .reviews-link:hover {
             transform: translate(-50%, -2px);
@@ -436,6 +421,15 @@
             padding: clamp(28px, 6vw, 48px);
             box-shadow: 0 18px 36px rgba(15,23,42,0.12);
         }
+        .inquiry-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(16px, 4vw, 28px);
+            background: linear-gradient(135deg, rgba(27,108,255,0.08), rgba(14,165,233,0.1));
+            border-radius: 24px;
+            padding: clamp(28px, 6vw, 48px);
+            box-shadow: 0 18px 36px rgba(15,23,42,0.12);
+        }
         .inquiry-form label {
             display: grid;
             gap: 8px;
@@ -455,6 +449,9 @@
             background: #fff;
             color: var(--secondary);
             box-shadow: inset 0 2px 4px rgba(15,23,42,0.05);
+        }
+        .inquiry-form__item--message {
+            grid-column: span 2;
         }
         .inquiry-form textarea {
             min-height: 140px;
@@ -497,14 +494,65 @@
             }
             .inquiry-form {
                 grid-template-columns: 1fr;
+                padding: clamp(24px, 5vw, 40px);
+            }
+            .inquiry-form label {
+                grid-column: span 1 !important;
             }
             .inquiry-form__actions {
+                grid-column: span 1;
+            }
+            .inquiry-form__item--message {
                 grid-column: span 1;
             }
         }
         @media (max-width: 640px) {
             .inquiry-section {
                 padding-bottom: clamp(48px, 16vw, 120px);
+            }
+            .inquiry-form {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: clamp(24px, 8vw, 36px);
+                background: #ffffff;
+                box-shadow: 0 16px 32px rgba(15,23,42,0.08);
+                border-radius: 20px;
+            }
+            .inquiry-form label {
+                background: rgba(27,108,255,0.05);
+                border-radius: 16px;
+                border: 1px solid rgba(27,108,255,0.16);
+                padding: 14px 16px;
+                gap: 10px;
+                font-size: 13px;
+                box-shadow: 0 6px 16px rgba(15,23,42,0.05);
+            }
+            .inquiry-form input,
+            .inquiry-form select,
+            .inquiry-form textarea {
+                border-radius: 12px;
+                border: 1px solid rgba(27,108,255,0.18);
+                padding: 12px 14px;
+                font-size: 15px;
+                background: #fff;
+                box-shadow: inset 0 1px 3px rgba(15,23,42,0.06);
+            }
+            .inquiry-form textarea {
+                min-height: 120px;
+            }
+            .inquiry-form__item--name { order: 1; }
+            .inquiry-form__item--phone { order: 2; }
+            .inquiry-form__item--email { order: 3; }
+            .inquiry-form__item--service { order: 4; }
+            .inquiry-form__item--date { order: 5; }
+            .inquiry-form__item--area { order: 6; }
+            .inquiry-form__item--message { order: 7; }
+            .inquiry-form__actions { order: 8; }
+            .reviews-link {
+                padding: 10px 18px;
+                font-size: 13px;
+                bottom: 18px;
+                box-shadow: 0 8px 18px rgba(27,108,255,0.28);
             }
         }
         .sticky-contact {
@@ -567,6 +615,23 @@
         .sticky-contact__button:active {
             transform: translateY(0);
         }
+        .sticky-contact__cta {
+            display: none;
+        }
+        .sticky-contact__cta a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            border-radius: 999px;
+            background: #fff;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 14px 26px rgba(15,23,42,0.2);
+            text-decoration: none;
+        }
         @media (max-width: 1024px) {
             .sticky-contact__inner {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -580,13 +645,73 @@
                 padding: 18px clamp(14px, 5vw, 24px);
             }
             .sticky-contact__inner {
-                grid-template-columns: 1fr;
+                display: none;
             }
             .sticky-contact label {
                 font-size: 13px;
             }
             .sticky-contact__button {
                 width: 100%;
+            }
+            .sticky-contact__cta {
+                display: block;
+            }
+        }
+        .floating-quicklinks {
+            position: fixed;
+            bottom: clamp(92px, 14vw, 124px);
+            right: clamp(16px, 5vw, 28px);
+            display: grid;
+            gap: 12px;
+            z-index: 1300;
+        }
+        .floating-quicklinks button,
+        .floating-quicklinks a {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(27,108,255,0.92);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 14px 28px rgba(15,23,42,0.22);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            text-decoration: none;
+        }
+        .floating-quicklinks button:hover,
+        .floating-quicklinks a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 34px rgba(15,23,42,0.28);
+            background: rgba(27,108,255,1);
+        }
+        .floating-quicklinks .kakao {
+            background: #f7e600;
+            color: #3a1d1d;
+        }
+        .floating-quicklinks .kakao:hover {
+            background: #f5d000;
+        }
+        .floating-quicklinks .call {
+            background: #22c55e;
+        }
+        .floating-quicklinks .call:hover {
+            background: #16a34a;
+        }
+        @media (max-width: 640px) {
+            .floating-quicklinks {
+                bottom: clamp(120px, 20vw, 160px);
+                right: clamp(12px, 6vw, 20px);
+                gap: 10px;
+            }
+            .floating-quicklinks button,
+            .floating-quicklinks a {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
             }
         }
         .cta {
@@ -735,7 +860,8 @@
                 <img src='images/logo.png' alt='청소하는아빠 로고'>
             </div>
             <button class='menu-toggle' type='button' aria-controls='mobileNav' aria-expanded='false'>
-                <span></span>메뉴
+                <span class='menu-toggle__icon' aria-hidden='true'>🧹</span>
+                <span class='sr-only'>메뉴 열기</span>
             </button>
             <nav aria-label='주요 섹션'>
                 <ul class='site-nav'>
@@ -860,19 +986,19 @@
             <p class='inquiry-section__subtitle'>원하시는 일정과 청소 유형을 남겨주시면 담당 팀장이 직접 연락드립니다.</p>
         </div>
         <form class='inquiry-form' action='#' method='post'>
-            <label>
+            <label class='inquiry-form__item--name'>
                 이름
                 <input type='text' name='inquiry-name' placeholder='이름을 입력하세요' autocomplete='name' required>
             </label>
-            <label>
+            <label class='inquiry-form__item--phone'>
                 연락처
                 <input type='tel' name='inquiry-phone' placeholder='예: 010-1234-5678' autocomplete='tel' required>
             </label>
-            <label>
+            <label class='inquiry-form__item--email'>
                 이메일
                 <input type='email' name='inquiry-email' placeholder='연락 받으실 이메일(선택)' autocomplete='email'>
             </label>
-            <label>
+            <label class='inquiry-form__item--service'>
                 희망 서비스
                 <select name='inquiry-service'>
                     <option value='입주청소'>입주 청소</option>
@@ -882,15 +1008,15 @@
                     <option value='기타' selected>기타 문의</option>
                 </select>
             </label>
-            <label>
+            <label class='inquiry-form__item--date'>
                 방문 희망일
                 <input type='date' name='inquiry-date'>
             </label>
-            <label>
+            <label class='inquiry-form__item--area'>
                 지역
                 <input type='text' name='inquiry-area' placeholder='예: 서울 강남구' autocomplete='address-level2'>
             </label>
-            <label style='grid-column: span 2;'>
+            <label class='inquiry-form__item--message'>
                 문의 내용
                 <textarea name='inquiry-message' placeholder='공간 규모, 요청 사항 등을 자세히 남겨주세요.'></textarea>
             </label>
@@ -947,6 +1073,15 @@
             </label>
             <button type='submit' class='sticky-contact__button'>문의하기</button>
         </form>
+        <div class='sticky-contact__cta'>
+            <a href='#inquiry'>무료 견적 받기</a>
+        </div>
+    </div>
+
+    <div class='floating-quicklinks' aria-label='바로가기'>
+        <button type='button' class='top' data-scroll-top aria-label='맨 위로 이동'>⬆️</button>
+        <a href='https://pf.kakao.com/_yourchannel' target='_blank' rel='noopener' class='kakao' aria-label='카카오톡 채널 열기'>💬</a>
+        <a href='tel:050713066398' class='call' aria-label='전화 연결'>📞</a>
     </div>
 
     <script>
@@ -1081,6 +1216,13 @@
                 startSlider();
             } else if (sliderSlides.length) {
                 updateSlider(0);
+            }
+
+            const scrollTopButton = document.querySelector('[data-scroll-top]');
+            if (scrollTopButton) {
+                scrollTopButton.addEventListener('click', function () {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
             }
 
             if ('IntersectionObserver' in window) {
