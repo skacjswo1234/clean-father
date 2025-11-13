@@ -1,0 +1,1116 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>청소하는아빠 | 프리미엄 홈 케어</title>
+    <meta name="description" content="전화 한 통이면 끝. 오늘 요청 → 내일 깨끗한 집. 청소하는아빠의 프리미엄 청소 서비스.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap' rel='stylesheet'>
+    <style>
+        :root {
+            --primary:#1b6cff;
+            --secondary:#111827;
+            --accent:#0ea5e9;
+            --bg:#f3f4f6;
+            --footer-bg:#0f172a;
+            --text:#111827;
+            --muted:#6b7280;
+            --footer-primary:#fff;
+            --footer-accent:#1b6cff;
+            --footer-border:rgba(27,108,255,0.2);
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            padding-bottom: 110px;
+            transition: transform 0.3s ease;
+        }
+        img { display: block; max-width: 100%; height: auto; }
+        a { color: inherit; text-decoration: none; }
+        .site-header {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 1px 12px rgba(15,23,42,0.05);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+        }
+        .site-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(4px, 1.2vw, 10px);
+            gap: clamp(12px, 4vw, 40px);
+            max-width: 1240px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .branding {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .branding img {
+            height: clamp(88px, 10vw, 120px);
+        }
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1px solid rgba(27,108,255,0.24);
+            border-radius: 999px;
+            background: rgba(27,108,255,0.08);
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease, border 0.2s ease;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: currentColor;
+            position: relative;
+        }
+        .menu-toggle span::before,
+        .menu-toggle span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: currentColor;
+            transition: transform 0.2s ease;
+        }
+        .menu-toggle span::before {
+            top: -6px;
+        }
+        .menu-toggle span::after {
+            top: 6px;
+        }
+        .menu-toggle:hover {
+            background: rgba(27,108,255,0.16);
+            border-color: rgba(27,108,255,0.32);
+        }
+        .menu-toggle[aria-expanded="true"] {
+            background: rgba(27,108,255,0.24);
+        }
+        .menu-toggle[aria-expanded="true"] span {
+            background: transparent;
+        }
+        .menu-toggle[aria-expanded="true"] span::before {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .menu-toggle[aria-expanded="true"] span::after {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 3vw, 28px);
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+            font-size: clamp(12px, 1.4vw, 15px);
+            font-weight: 600;
+            color: var(--secondary);
+            white-space: nowrap;
+        }
+        .site-nav a {
+            color: inherit;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.2s ease;
+        }
+        .site-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.2s ease;
+        }
+        .site-nav a:hover {
+            color: var(--primary);
+        }
+        .site-nav a:hover::after {
+            transform: scaleX(1);
+        }
+        @media (max-width: 900px) {
+            .site-nav {
+                gap: 16px;
+                font-size: 13px;
+            }
+        }
+        @media (max-width: 720px) {
+            .site-nav {
+                display: none;
+            }
+            .menu-toggle {
+                display: inline-flex;
+            }
+        }
+        .mobile-nav__backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,0.4);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1100;
+        }
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: min(320px, 80vw);
+            background: #fff;
+            box-shadow: -8px 0 24px rgba(15,23,42,0.18);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            gap: 24px;
+        }
+        .mobile-nav__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .mobile-nav__title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        .mobile-nav__close {
+            border: none;
+            background: transparent;
+            color: var(--secondary);
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .mobile-nav__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .mobile-nav__list a {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        .mobile-nav__list a:focus,
+        .mobile-nav__list a:hover {
+            color: var(--primary);
+        }
+        .mobile-nav__cta {
+            margin-top: auto;
+            display: grid;
+            gap: 12px;
+        }
+        .mobile-nav__cta button,
+        .mobile-nav__cta a {
+            border-radius: 999px;
+            padding: 14px 18px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .mobile-nav__cta .primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+        .mobile-nav__cta .secondary {
+            background: rgba(27,108,255,0.12);
+            color: var(--primary);
+            border: 1px solid rgba(27,108,255,0.24);
+        }
+        .mobile-nav--open {
+            transform: translateX(0);
+        }
+        .mobile-nav__backdrop--visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        body.menu-open {
+            overflow: hidden;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+            margin: -1px 0 0 0;
+        }
+        .image-section {
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+        .image-section img {
+            width: 100%;
+            height: auto;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translate3d(0, 60px, 0);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: opacity, transform;
+        }
+        .reveal.reveal--visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+        .image-section--reviews {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .reviews-link {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(16px, 4vw, 36px);
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 999px;
+            background: rgba(27,108,255,0.9);
+            color: #fff;
+            font-weight: 600;
+            font-size: clamp(14px, 2.6vw, 18px);
+            box-shadow: 0 12px 24px rgba(27,108,255,0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        .reviews-link:hover {
+            transform: translate(-50%, -2px);
+            background: rgba(27,108,255,1);
+            box-shadow: 0 16px 28px rgba(27,108,255,0.4);
+        }
+        .reviews-link:active {
+            transform: translate(-50%, 0);
+        }
+        .testimonials {
+            padding: clamp(40px, 8vw, 96px) clamp(16px, 6vw, 80px);
+            background: linear-gradient(135deg, rgba(236,244,255,0.9), rgba(205,222,255,0.9));
+            display: grid;
+            gap: clamp(28px, 4vw, 48px);
+        }
+        .testimonials__header {
+            text-align: center;
+            display: grid;
+            gap: 12px;
+        }
+        .testimonials__title {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        .testimonials__subtitle {
+            font-size: clamp(14px, 2.6vw, 18px);
+            color: rgba(17,24,39,0.72);
+        }
+        .testimonial-slider {
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.75);
+            box-shadow: 0 18px 38px rgba(15,23,42,0.12);
+        }
+        .testimonial-track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .testimonial-card {
+            min-width: 100%;
+            padding: clamp(28px, 6vw, 48px);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+        .testimonial-card__media {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(27,108,255,0.22), rgba(14,165,233,0.16));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(27,108,255,0.9);
+            font-weight: 700;
+            font-size: clamp(16px, 3vw, 20px);
+            letter-spacing: 0.02em;
+        }
+        .testimonial-card__body {
+            display: grid;
+            gap: 12px;
+        }
+        .testimonial-card__quote {
+            font-size: clamp(16px, 2.8vw, 20px);
+            color: var(--secondary);
+            line-height: 1.6;
+        }
+        .testimonial-card__meta {
+            font-size: 14px;
+            color: rgba(17,24,39,0.6);
+        }
+        .testimonial-dots {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(16px, 4vw, 24px);
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(15,23,42,0.22);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        .testimonial-dot--active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        .inquiry-section {
+            padding: clamp(48px, 8vw, 96px) clamp(16px, 6vw, 80px);
+            background: #fff;
+            display: grid;
+            gap: clamp(24px, 4vw, 40px);
+        }
+        .inquiry-section__header {
+            display: grid;
+            gap: 10px;
+        }
+        .inquiry-section__title {
+            font-size: clamp(24px, 4.8vw, 36px);
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        .inquiry-section__subtitle {
+            font-size: clamp(14px, 2.6vw, 18px);
+            color: rgba(17,24,39,0.72);
+        }
+        .inquiry-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(16px, 4vw, 28px);
+            background: linear-gradient(135deg, rgba(27,108,255,0.08), rgba(14,165,233,0.1));
+            border-radius: 24px;
+            padding: clamp(28px, 6vw, 48px);
+            box-shadow: 0 18px 36px rgba(15,23,42,0.12);
+        }
+        .inquiry-form label {
+            display: grid;
+            gap: 8px;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .inquiry-form input,
+        .inquiry-form select,
+        .inquiry-form textarea {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid rgba(27,108,255,0.18);
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 15px;
+            background: #fff;
+            color: var(--secondary);
+            box-shadow: inset 0 2px 4px rgba(15,23,42,0.05);
+        }
+        .inquiry-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        .inquiry-form__actions {
+            grid-column: span 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+        }
+        .inquiry-form__hint {
+            font-size: 13px;
+            color: rgba(17,24,39,0.5);
+        }
+        .inquiry-form__submit {
+            padding: 14px 32px;
+            border-radius: 14px;
+            border: none;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 14px 28px rgba(27,108,255,0.32);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .inquiry-form__submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 32px rgba(27,108,255,0.38);
+        }
+        .inquiry-form__submit:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 1024px) {
+            .testimonial-card {
+                padding: clamp(24px, 5vw, 36px);
+            }
+            .inquiry-form {
+                grid-template-columns: 1fr;
+            }
+            .inquiry-form__actions {
+                grid-column: span 1;
+            }
+        }
+        @media (max-width: 640px) {
+            .inquiry-section {
+                padding-bottom: clamp(48px, 16vw, 120px);
+            }
+        }
+        .sticky-contact {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(27,108,255,0.95), rgba(33,150,243,0.9));
+            box-shadow: 0 -12px 24px rgba(15,23,42,0.15);
+            padding: 16px clamp(16px, 4vw, 36px);
+            z-index: 1200;
+        }
+        .sticky-contact__inner {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+            gap: clamp(12px, 2vw, 20px);
+            align-items: center;
+        }
+        .sticky-contact label {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            color: rgba(255,255,255,0.92);
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .sticky-contact input,
+        .sticky-contact textarea {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-family: inherit;
+            background: rgba(255,255,255,0.96);
+            color: var(--secondary);
+            box-shadow: inset 0 2px 6px rgba(15,23,42,0.12);
+            resize: none;
+        }
+        .sticky-contact textarea {
+            min-height: 48px;
+        }
+        .sticky-contact__button {
+            align-self: stretch;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            background: #fff;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 12px 26px rgba(15,23,42,0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .sticky-contact__button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(15,23,42,0.26);
+        }
+        .sticky-contact__button:active {
+            transform: translateY(0);
+        }
+        @media (max-width: 1024px) {
+            .sticky-contact__inner {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 640px) {
+            body {
+                padding-bottom: 180px;
+            }
+            .sticky-contact {
+                padding: 18px clamp(14px, 5vw, 24px);
+            }
+            .sticky-contact__inner {
+                grid-template-columns: 1fr;
+            }
+            .sticky-contact label {
+                font-size: 13px;
+            }
+            .sticky-contact__button {
+                width: 100%;
+            }
+        }
+        .cta {
+            margin: clamp(32px, 6vw, 96px) clamp(16px, 5vw, 64px);
+            padding: clamp(32px, 6vw, 80px) clamp(24px, 6vw, 80px);
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(27,108,255,0.95), rgba(14,165,233,0.92));
+            color: #fff;
+            box-shadow: 0 18px 36px rgba(14,165,233,0.35);
+        }
+        .cta__title {
+            font-size: clamp(26px, 5vw, 40px);
+            font-weight: 700;
+            margin: 0 0 18px 0;
+        }
+        .cta__subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            margin: 0 0 12px 0;
+            font-weight: 600;
+        }
+        .cta__meta {
+            font-size: clamp(15px, 2.4vw, 18px);
+            margin: 0 0 28px 0;
+            color: rgba(255,255,255,0.85);
+        }
+        .cta__list {
+            display: grid;
+            gap: 10px;
+            margin: 0 0 32px 0;
+            padding: 0;
+            list-style: none;
+        }
+        .cta__list li {
+            position: relative;
+            padding-left: 26px;
+            font-size: clamp(15px, 2.6vw, 18px);
+        }
+        .cta__list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: rgba(255,255,255,0.85);
+            font-weight: 700;
+        }
+        .cta__buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .cta__button {
+            flex: 1 1 220px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 22px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .cta__button--primary {
+            background: #fff;
+            color: var(--primary);
+            box-shadow: 0 10px 24px rgba(15,23,42,0.18);
+        }
+        .cta__button--ghost {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+        .cta__button:hover { transform: translateY(-2px); }
+        .cta__button:active { transform: translateY(0); }
+        .site-footer {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(219,233,255,0.95));
+            color: var(--secondary);
+            padding: clamp(32px, 6vw, 64px) clamp(20px, 6vw, 80px);
+            border-top: 1px solid var(--footer-border);
+        }
+        .site-footer__title {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 700;
+            margin-bottom: clamp(20px, 3vw, 28px);
+            color: var(--footer-accent);
+        }
+        .site-footer__grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        .site-footer dl { margin: 0; }
+        .site-footer dt {
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--footer-accent);
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        .site-footer dd {
+            margin: 0 0 10px 0;
+            color: rgba(17,24,39,0.72);
+        }
+        .site-footer__legal {
+            margin-top: clamp(24px, 4vw, 36px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 14px;
+            border-top: 1px solid var(--footer-border);
+            padding-top: 18px;
+        }
+        .site-footer__legal a {
+            color: var(--footer-accent);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .site-footer__legal a::after {
+            content: \"\";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(27,108,255,0.35);
+            transition: transform 0.2s ease;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        .site-footer__legal a:hover::after {
+            transform: scaleX(1);
+        }
+        @media (max-width: 768px) {
+            main { padding: 16px; }
+            .cta { margin: 24px 16px 32px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class='site-header'>
+        <div class='site-header__inner'>
+            <div class='branding'>
+                <img src='images/logo.png' alt='청소하는아빠 로고'>
+            </div>
+            <button class='menu-toggle' type='button' aria-controls='mobileNav' aria-expanded='false'>
+                <span></span>메뉴
+            </button>
+            <nav aria-label='주요 섹션'>
+                <ul class='site-nav'>
+                    <li><a href='#hero'>홈</a></li>
+                    <li><a href='#why-again'>왜 또 맡겨야 할까</a></li>
+                    <li><a href='#difference'>청소하는아빠는 다릅니다</a></li>
+                    <li><a href='#why-us'>왜 청소하는아빠일까</a></li>
+                    <li><a href='#checklist'>청소 전 체크</a></li>
+                    <li><a href='#reviews'>고객 리뷰</a></li>
+                    <li><a href='#cta'>무료 견적</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class='mobile-nav__backdrop' data-menu-backdrop></div>
+    <nav class='mobile-nav' id='mobileNav' aria-hidden='true'>
+        <div class='mobile-nav__header'>
+            <span class='mobile-nav__title'>청소하는아빠</span>
+            <button type='button' class='mobile-nav__close' aria-label='메뉴 닫기' data-menu-close>&times;</button>
+        </div>
+        <ul class='mobile-nav__list'>
+            <li><a href='#hero' data-menu-link>홈</a></li>
+            <li><a href='#why-again' data-menu-link>왜 또 맡겨야 할까</a></li>
+            <li><a href='#difference' data-menu-link>청소하는아빠는 다릅니다</a></li>
+            <li><a href='#why-us' data-menu-link>왜 청소하는아빠일까</a></li>
+            <li><a href='#checklist' data-menu-link>청소 전 체크</a></li>
+            <li><a href='#reviews' data-menu-link>고객 리뷰</a></li>
+            <li><a href='#cta' data-menu-link>무료 견적</a></li>
+        </ul>
+        <div class='mobile-nav__cta'>
+            <a class='secondary' href='tel:050713066398'>바로 전화 연결</a>
+            <button type='button' class='primary' data-action='quote' data-url='https://m.place.naver.com/place/1145477364/home?entry=pll'>무료 견적 받기</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class='image-section' id='hero' data-reveal>
+            <img src='images/h-1.png' alt='청소하는아빠 히어로 섹션'>
+        </section>
+
+        <section class='image-section' id='why-again' data-reveal>
+            <img src='images/h-2.png' alt='맡겼는데 왜 또 맡겨야할까 섹션'>
+        </section>
+
+        <section class='image-section' id='difference' data-reveal>
+            <img src='images/h-3.png' alt='청소하는아빠는 다릅니다 섹션'>
+        </section>
+
+        <section class='image-section' id='why-us' data-reveal>
+            <img src='images/h-4.png' alt='왜 청소하는아빠일까 섹션'>
+        </section>
+
+        <section class='image-section' id='checklist' data-reveal>
+            <img src='images/h-5.png' alt='청소하기 전 체크 섹션'>
+        </section>
+
+        <section class='image-section image-section--reviews' id='reviews' data-reveal>
+            <img src='images/h-6.png' alt='청소하는아빠 고객 리뷰 섹션'>
+            <a class='reviews-link' href='https://m.place.naver.com/place/1145477364/review/ugc?entry=pll&type=list' target='_blank' rel='noopener'>
+                실시간 리뷰 확인하러 가기
+            </a>
+        </section>
+    </main>
+
+    <section class='cta' id='cta' data-reveal>
+        <h2 class='cta__title'>지금, 아빠가 청소하러 갑니다.</h2>
+        <p class='cta__subtitle'>전화 한 통이면 끝.</p>
+        <p class='cta__meta'>오늘 요청 → 내일 깨끗한 집.</p>
+        <ul class='cta__list'>
+            <li>친환경 세제 사용</li>
+            <li>전국 어디든 출동 가능</li>
+            <li>100% 책임 청소</li>
+            <li>하청 NO, 직영팀장 직접 방문</li>
+        </ul>
+        <div class='cta__buttons'>
+            <button class='cta__button cta__button--primary' data-action='quote' data-url='https://m.place.naver.com/place/1145477364/home?entry=pll'>무료 견적 받기</button>
+            <button class='cta__button cta__button--ghost' data-action='tel' data-tel='050713066398'>바로 전화 연결</button>
+        </div>
+    </section>
+
+    <section class='testimonials' id='testimonials' data-reveal>
+        <div class='testimonials__header'>
+            <h2 class='testimonials__title'>고객 후기 미리보기</h2>
+            <p class='testimonials__subtitle'>곧 전달해 주실 실제 이미지로 자동 전환되는 카드 섹션입니다.</p>
+        </div>
+        <div class='testimonial-slider' data-slider>
+            <div class='testimonial-track' data-slider-track>
+                <article class='testimonial-card'>
+                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #1</div>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“청소하는아빠 팀은 예약 다음날 바로 방문해 주셨고, 입주 청소가 끝난 후 새집처럼 반짝였어요.”</p>
+                        <p class='testimonial-card__meta'>김** 고객 · 입주 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #2</div>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“아이들 알레르기가 걱정돼 친환경 세제를 요청했는데, 약속대로 세심히 청소해 주셔서 안심됐습니다.”</p>
+                        <p class='testimonial-card__meta'>박** 고객 · 이사 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #3</div>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“하청 없이 팀장님이 직접 방문해 상주하시면서 체크해 주셔서 신뢰가 갔어요. 재이용 의사 100%!”</p>
+                        <p class='testimonial-card__meta'>정** 고객 · 정기 홈케어</p>
+                    </div>
+                </article>
+            </div>
+            <div class='testimonial-dots' data-slider-dots>
+                <button type='button' class='testimonial-dot testimonial-dot--active' aria-label='첫 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='두 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='세 번째 후기 보기' data-slider-dot></button>
+            </div>
+        </div>
+    </section>
+
+    <section class='inquiry-section' id='inquiry' data-reveal>
+        <div class='inquiry-section__header'>
+            <h2 class='inquiry-section__title'>맞춤 상담 요청하기</h2>
+            <p class='inquiry-section__subtitle'>원하시는 일정과 청소 유형을 남겨주시면 담당 팀장이 직접 연락드립니다.</p>
+        </div>
+        <form class='inquiry-form' action='#' method='post'>
+            <label>
+                이름
+                <input type='text' name='inquiry-name' placeholder='이름을 입력하세요' autocomplete='name' required>
+            </label>
+            <label>
+                연락처
+                <input type='tel' name='inquiry-phone' placeholder='예: 010-1234-5678' autocomplete='tel' required>
+            </label>
+            <label>
+                이메일
+                <input type='email' name='inquiry-email' placeholder='연락 받으실 이메일(선택)' autocomplete='email'>
+            </label>
+            <label>
+                희망 서비스
+                <select name='inquiry-service'>
+                    <option value='입주청소'>입주 청소</option>
+                    <option value='이사청소'>이사 청소</option>
+                    <option value='부분청소'>부분/부분 시공 청소</option>
+                    <option value='정기홈케어'>정기 홈케어</option>
+                    <option value='기타' selected>기타 문의</option>
+                </select>
+            </label>
+            <label>
+                방문 희망일
+                <input type='date' name='inquiry-date'>
+            </label>
+            <label>
+                지역
+                <input type='text' name='inquiry-area' placeholder='예: 서울 강남구' autocomplete='address-level2'>
+            </label>
+            <label style='grid-column: span 2;'>
+                문의 내용
+                <textarea name='inquiry-message' placeholder='공간 규모, 요청 사항 등을 자세히 남겨주세요.'></textarea>
+            </label>
+            <div class='inquiry-form__actions'>
+                <p class='inquiry-form__hint'>남겨주신 내용은 상담 용도로만 사용하며, 별도로 저장하지 않습니다.</p>
+                <button type='submit' class='inquiry-form__submit'>문의 접수하기</button>
+            </div>
+        </form>
+    </section>
+
+    <footer class='site-footer' id='footer' data-reveal>
+        <div class='site-footer__title'>정직한 아빠의 약속</div>
+        <div class='site-footer__grid'>
+            <dl>
+                <dt>상호명</dt>
+                <dd>청소하는 아빠</dd>
+            </dl>
+            <dl>
+                <dt>대표자명 / 사업자등록번호</dt>
+                <dd>대표자명 및 사업자등록번호 확인 후 입력</dd>
+            </dl>
+            <dl>
+                <dt>연락처</dt>
+                <dd>0507-1306-6398</dd>
+                <dt>카카오톡 채널</dt>
+                <dd>카카오톡 채널 링크 추가 예정</dd>
+            </dl>
+            <dl>
+                <dt>이메일</dt>
+                <dd>이메일 주소 입력</dd>
+                <dt>네이버플레이스</dt>
+                <dd><a href='https://m.place.naver.com/place/1145477364/home?entry=pll' target='_blank' rel='noopener'>청소하는아빠 네이버플레이스</a></dd>
+            </dl>
+        </div>
+        <div class='site-footer__legal'>
+            <a href='#!'>[개인정보처리방침]</a>
+            <a href='#!'>[이용약관]</a>
+        </div>
+    </footer>
+
+    <div class='sticky-contact' role='region' aria-label='문의하기 빠른 입력'>
+        <form class='sticky-contact__inner'>
+            <label>
+                이름
+                <input type='text' name='name' placeholder='이름을 입력하세요' autocomplete='name'>
+            </label>
+            <label>
+                연락처
+                <input type='tel' name='phone' placeholder='예: 010-1234-5678' autocomplete='tel'>
+            </label>
+            <label style='grid-column: span 2;'>
+                문의 내용
+                <textarea name='message' placeholder='요청 사항을 입력하세요'></textarea>
+            </label>
+            <button type='submit' class='sticky-contact__button'>문의하기</button>
+        </form>
+    </div>
+
+    <script>
+        (function () {
+            const quoteButtons = document.querySelectorAll('[data-action=\"quote\"]');
+            const telButtons = document.querySelectorAll('[data-action=\"tel\"]');
+            const revealElements = document.querySelectorAll('[data-reveal]');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileBackdrop = document.querySelector('[data-menu-backdrop]');
+            const mobileCloseButtons = document.querySelectorAll('[data-menu-close]');
+            const mobileLinks = document.querySelectorAll('[data-menu-link]');
+            const bodyEl = document.body;
+            const sliderContainer = document.querySelector('[data-slider]');
+            const sliderTrack = document.querySelector('[data-slider-track]');
+            const sliderSlides = sliderTrack ? Array.from(sliderTrack.children) : [];
+            const sliderDots = document.querySelectorAll('[data-slider-dot]');
+            let sliderIndex = 0;
+            let sliderTimer = null;
+
+            function openMenu() {
+                if (!mobileNav) return;
+                mobileNav.classList.add('mobile-nav--open');
+                mobileNav.setAttribute('aria-hidden', 'false');
+                if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+                if (mobileBackdrop) mobileBackdrop.classList.add('mobile-nav__backdrop--visible');
+                bodyEl.classList.add('menu-open');
+            }
+
+            function closeMenu() {
+                if (!mobileNav) return;
+                mobileNav.classList.remove('mobile-nav--open');
+                mobileNav.setAttribute('aria-hidden', 'true');
+                if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+                if (mobileBackdrop) mobileBackdrop.classList.remove('mobile-nav__backdrop--visible');
+                bodyEl.classList.remove('menu-open');
+            }
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function () {
+                    const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                    if (expanded) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+            }
+
+            mobileCloseButtons.forEach(function (btn) {
+                btn.addEventListener('click', closeMenu);
+            });
+
+            if (mobileBackdrop) {
+                mobileBackdrop.addEventListener('click', closeMenu);
+            }
+
+            mobileLinks.forEach(function (link) {
+                link.addEventListener('click', closeMenu);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeMenu();
+                }
+            });
+
+            if (window.matchMedia) {
+                const mq = window.matchMedia('(min-width: 721px)');
+                mq.addEventListener('change', function (event) {
+                    if (event.matches) {
+                        closeMenu();
+                    }
+                });
+            }
+
+            quoteButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const url = button.dataset.url;
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+
+            telButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const tel = button.dataset.tel || '';
+                    if (tel) {
+                        window.location.href = 'tel:' + tel.replace(/[^0-9+]/g, '');
+                    }
+                });
+            });
+
+            function updateSlider(index) {
+                if (!sliderTrack || sliderSlides.length === 0) return;
+                sliderIndex = (index + sliderSlides.length) % sliderSlides.length;
+                sliderTrack.style.transform = 'translateX(-' + sliderIndex * 100 + '%)';
+                sliderDots.forEach(function (dot, dotIndex) {
+                    dot.classList.toggle('testimonial-dot--active', dotIndex === sliderIndex);
+                });
+            }
+
+            function stopSlider() {
+                if (sliderTimer) {
+                    window.clearInterval(sliderTimer);
+                    sliderTimer = null;
+                }
+            }
+
+            function startSlider() {
+                if (sliderSlides.length <= 1) return;
+                stopSlider();
+                sliderTimer = window.setInterval(function () {
+                    updateSlider(sliderIndex + 1);
+                }, 2500);
+            }
+
+            if (sliderDots.length) {
+                sliderDots.forEach(function (dot, dotIndex) {
+                    dot.addEventListener('click', function () {
+                        updateSlider(dotIndex);
+                        startSlider();
+                    });
+                });
+            }
+
+            if (sliderContainer && sliderSlides.length > 1) {
+                sliderContainer.addEventListener('pointerenter', stopSlider);
+                sliderContainer.addEventListener('pointerleave', startSlider);
+                updateSlider(0);
+                startSlider();
+            } else if (sliderSlides.length) {
+                updateSlider(0);
+            }
+
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(
+                    function (entries, obs) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('reveal--visible');
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    {
+                        root: null,
+                        threshold: 0.18,
+                        rootMargin: '0px 0px -15% 0px'
+                    }
+                );
+
+                revealElements.forEach(function (el, index) {
+                    el.classList.add('reveal');
+                    el.style.transitionDelay = Math.min(index * 0.08, 0.24) + 's';
+                    observer.observe(el);
+                });
+            } else {
+                revealElements.forEach(function (el) {
+                    el.classList.add('reveal', 'reveal--visible');
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
