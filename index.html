@@ -303,9 +303,63 @@
         .reviews-link:active {
             transform: translate(-50%, 0);
         }
+        .before-after {
+            padding: clamp(40px, 8vw, 96px) clamp(16px, 6vw, 80px);
+            background: #fff;
+            display: grid;
+            gap: clamp(24px, 5vw, 40px);
+        }
+        .before-after__header {
+            text-align: center;
+            display: grid;
+            gap: 12px;
+        }
+        .before-after__title {
+            font-size: clamp(24px, 5vw, 36px);
+            font-weight: 700;
+            color: var(--secondary);
+        }
+        .before-after__subtitle {
+            font-size: clamp(14px, 2.6vw, 18px);
+            color: rgba(17,24,39,0.7);
+        }
+        .before-after__slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(226,232,240,0.36), rgba(148,163,184,0.12));
+            box-shadow: 0 20px 40px rgba(15,23,42,0.12);
+        }
+        .before-after__track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .before-after__card {
+            min-width: 100%;
+            padding: clamp(16px, 4vw, 36px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .before-after__card img {
+            border-radius: 20px;
+            width: 100%;
+            max-width: 760px;
+            box-shadow: 0 16px 32px rgba(15,23,42,0.18);
+        }
+        @media (min-width: 960px) {
+            .before-after__slider {
+                border-radius: 32px;
+            }
+            .before-after__card {
+                padding: clamp(20px, 3vw, 48px);
+            }
+        }
         .testimonials {
             padding: clamp(40px, 8vw, 96px) clamp(16px, 6vw, 80px);
-            background: linear-gradient(135deg, rgba(236,244,255,0.9), rgba(205,222,255,0.9));
+            background: #fff;
             display: grid;
             gap: clamp(28px, 4vw, 48px);
         }
@@ -321,16 +375,16 @@
         }
         .testimonials__subtitle {
             font-size: clamp(14px, 2.6vw, 18px);
-            color: rgba(17,24,39,0.72);
+            color: rgba(17,24,39,0.7);
         }
         .testimonial-slider {
-            max-width: 960px;
+            width: 100%;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
-            border-radius: 24px;
-            background: rgba(255,255,255,0.75);
-            box-shadow: 0 18px 38px rgba(15,23,42,0.12);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(226,232,240,0.36), rgba(148,163,184,0.12));
+            box-shadow: 0 20px 40px rgba(15,23,42,0.12);
         }
         .testimonial-track {
             display: flex;
@@ -339,31 +393,32 @@
         }
         .testimonial-card {
             min-width: 100%;
-            padding: clamp(28px, 6vw, 48px);
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+            padding: clamp(16px, 4vw, 36px);
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            gap: clamp(18px, 4vw, 28px);
+            text-align: center;
         }
         .testimonial-card__media {
+            width: min(100%, 760px);
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(15,23,42,0.06);
+            box-shadow: 0 16px 32px rgba(15,23,42,0.18);
+        }
+        .testimonial-card__media img {
             width: 100%;
-            aspect-ratio: 16 / 9;
-            border-radius: 18px;
-            background: linear-gradient(135deg, rgba(27,108,255,0.22), rgba(14,165,233,0.16));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(27,108,255,0.9);
-            font-weight: 700;
-            font-size: clamp(16px, 3vw, 20px);
-            letter-spacing: 0.02em;
+            height: auto;
+            display: block;
         }
         .testimonial-card__body {
             display: grid;
             gap: 12px;
+            max-width: 640px;
         }
         .testimonial-card__quote {
-            font-size: clamp(16px, 2.8vw, 20px);
+            font-size: clamp(16px, 2.6vw, 20px);
             color: var(--secondary);
             line-height: 1.6;
         }
@@ -562,48 +617,19 @@
             width: 100%;
             background: linear-gradient(90deg, rgba(27,108,255,0.95), rgba(33,150,243,0.9));
             box-shadow: 0 -12px 24px rgba(15,23,42,0.15);
-            padding: 16px clamp(16px, 4vw, 36px);
+            padding: clamp(14px, 4vw, 20px);
             z-index: 1200;
-        }
-        .sticky-contact__inner {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
-            gap: clamp(12px, 2vw, 20px);
-            align-items: center;
-        }
-        .sticky-contact label {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
-            color: rgba(255,255,255,0.92);
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .sticky-contact input,
-        .sticky-contact textarea {
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            padding: 12px 14px;
-            font-size: 14px;
-            font-family: inherit;
-            background: rgba(255,255,255,0.96);
-            color: var(--secondary);
-            box-shadow: inset 0 2px 6px rgba(15,23,42,0.12);
-            resize: none;
-        }
-        .sticky-contact textarea {
-            min-height: 48px;
+            justify-content: center;
         }
         .sticky-contact__button {
-            align-self: stretch;
             border: none;
-            border-radius: 12px;
-            padding: 14px 24px;
+            border-radius: 999px;
+            padding: clamp(14px, 3vw, 18px) clamp(32px, 6vw, 64px);
             background: #fff;
             color: var(--primary);
-            font-weight: 700;
-            font-size: 16px;
+            font-weight: 800;
+            font-size: clamp(16px, 2.4vw, 20px);
             cursor: pointer;
             box-shadow: 0 12px 26px rgba(15,23,42,0.22);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -615,46 +641,12 @@
         .sticky-contact__button:active {
             transform: translateY(0);
         }
-        .sticky-contact__cta {
-            display: none;
-        }
-        .sticky-contact__cta a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border-radius: 999px;
-            background: #fff;
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 16px;
-            padding: 16px 20px;
-            box-shadow: 0 14px 26px rgba(15,23,42,0.2);
-            text-decoration: none;
-        }
-        @media (max-width: 1024px) {
-            .sticky-contact__inner {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
         @media (max-width: 640px) {
             body {
                 padding-bottom: 180px;
             }
             .sticky-contact {
-                padding: 18px clamp(14px, 5vw, 24px);
-            }
-            .sticky-contact__inner {
-                display: none;
-            }
-            .sticky-contact label {
-                font-size: 13px;
-            }
-            .sticky-contact__button {
-                width: 100%;
-            }
-            .sticky-contact__cta {
-                display: block;
+                padding: clamp(16px, 6vw, 22px);
             }
         }
         .floating-quicklinks {
@@ -870,6 +862,7 @@
                     <li><a href='#difference'>청소하는아빠는 다릅니다</a></li>
                     <li><a href='#why-us'>왜 청소하는아빠일까</a></li>
                     <li><a href='#checklist'>청소 전 체크</a></li>
+                    <li><a href='#before-after'>전후 비교</a></li>
                     <li><a href='#reviews'>고객 리뷰</a></li>
                     <li><a href='#cta'>무료 견적</a></li>
                 </ul>
@@ -889,6 +882,7 @@
             <li><a href='#difference' data-menu-link>청소하는아빠는 다릅니다</a></li>
             <li><a href='#why-us' data-menu-link>왜 청소하는아빠일까</a></li>
             <li><a href='#checklist' data-menu-link>청소 전 체크</a></li>
+            <li><a href='#before-after' data-menu-link>전후 비교</a></li>
             <li><a href='#reviews' data-menu-link>고객 리뷰</a></li>
             <li><a href='#cta' data-menu-link>무료 견적</a></li>
         </ul>
@@ -945,19 +939,44 @@
         </section>
     </main>
 
-    <section class='cta' id='cta' data-reveal>
-        <h2 class='cta__title'>지금, 아빠가 청소하러 갑니다.</h2>
-        <p class='cta__subtitle'>전화 한 통이면 끝.</p>
-        <p class='cta__meta'>오늘 요청 → 내일 깨끗한 집.</p>
-        <ul class='cta__list'>
-            <li>친환경 세제 사용</li>
-            <li>전국 어디든 출동 가능</li>
-            <li>100% 책임 청소</li>
-            <li>하청 NO, 직영팀장 직접 방문</li>
-        </ul>
-        <div class='cta__buttons'>
-            <button class='cta__button cta__button--primary' data-action='quote' data-url='https://m.place.naver.com/place/1145477364/home?entry=pll'>무료 견적 받기</button>
-            <button class='cta__button cta__button--ghost' data-action='tel' data-tel='050713066398'>바로 전화 연결</button>
+    <section class='before-after' id='before-after' data-reveal>
+        <div class='before-after__header'>
+            <h2 class='before-after__title'>전후 비교 사진</h2>
+            <p class='before-after__subtitle'>청소 전과 후의 변화를 한눈에 확인해 보세요.</p>
+        </div>
+        <div class='before-after__slider' data-before-after-slider>
+            <div class='before-after__track' data-before-after-track>
+                <figure class='before-after__card'>
+                    <img src='images/001.png' alt='전후 비교 사진 1'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/002.png' alt='전후 비교 사진 2'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/003.png' alt='전후 비교 사진 3'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/004.png' alt='전후 비교 사진 4'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/005.png' alt='전후 비교 사진 5'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/006.png' alt='전후 비교 사진 6'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/007.png' alt='전후 비교 사진 7'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/008.png' alt='전후 비교 사진 8'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/009.png' alt='전후 비교 사진 9'>
+                </figure>
+                <figure class='before-after__card'>
+                    <img src='images/010.png' alt='전후 비교 사진 10'>
+                </figure>
+            </div>
         </div>
     </section>
 
@@ -969,24 +988,84 @@
         <div class='testimonial-slider' data-slider>
             <div class='testimonial-track' data-slider-track>
                 <article class='testimonial-card'>
-                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #1</div>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-1.png' alt='고객 후기 이미지 1'>
+                    </figure>
                     <div class='testimonial-card__body'>
                         <p class='testimonial-card__quote'>“청소하는아빠 팀은 예약 다음날 바로 방문해 주셨고, 입주 청소가 끝난 후 새집처럼 반짝였어요.”</p>
                         <p class='testimonial-card__meta'>김** 고객 · 입주 청소</p>
                     </div>
                 </article>
                 <article class='testimonial-card'>
-                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #2</div>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-2.png' alt='고객 후기 이미지 2'>
+                    </figure>
                     <div class='testimonial-card__body'>
                         <p class='testimonial-card__quote'>“아이들 알레르기가 걱정돼 친환경 세제를 요청했는데, 약속대로 세심히 청소해 주셔서 안심됐습니다.”</p>
                         <p class='testimonial-card__meta'>박** 고객 · 이사 청소</p>
                     </div>
                 </article>
                 <article class='testimonial-card'>
-                    <div class='testimonial-card__media' aria-hidden='true'>후기 이미지 #3</div>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-3.png' alt='고객 후기 이미지 3'>
+                    </figure>
                     <div class='testimonial-card__body'>
                         <p class='testimonial-card__quote'>“하청 없이 팀장님이 직접 방문해 상주하시면서 체크해 주셔서 신뢰가 갔어요. 재이용 의사 100%!”</p>
                         <p class='testimonial-card__meta'>정** 고객 · 정기 홈케어</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-4.png' alt='고객 후기 이미지 4'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“감쪽같이 청소해 주셔서 손님 맞이하기 딱 좋았어요. 문의부터 진행까지 빠르고 친절했습니다.”</p>
+                        <p class='testimonial-card__meta'>이** 고객 · 부분 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-5.png' alt='고객 후기 이미지 5'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“청소 직후 바로 입주했는데 먼지 하나 없이 깨끗했습니다. 세심한 마감 덕분에 향도 상쾌했어요.”</p>
+                        <p class='testimonial-card__meta'>박** 고객 · 신혼집 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-6.png' alt='고객 후기 이미지 6'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“아이 방 곰팡이 걱정돼 요청드렸는데, 꼼꼼하게 제거해 주셔서 마음이 놓였습니다.”</p>
+                        <p class='testimonial-card__meta'>최** 고객 · 부분 시공 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-7.png' alt='고객 후기 이미지 7'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“정기 홈케어를 맡겼는데 매번 같은 팀장님이 와 주셔서 믿고 맡기고 있습니다.”</p>
+                        <p class='testimonial-card__meta'>장** 고객 · 정기 홈케어</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-8.png' alt='고객 후기 이미지 8'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“사무실 이전 준비로 정신없었는데 청소하는아빠 덕분에 빠르게 정리할 수 있었습니다.”</p>
+                        <p class='testimonial-card__meta'>한** 고객 · 상업 공간 청소</p>
+                    </div>
+                </article>
+                <article class='testimonial-card'>
+                    <figure class='testimonial-card__media'>
+                        <img src='images/hu-9.png' alt='고객 후기 이미지 9'>
+                    </figure>
+                    <div class='testimonial-card__body'>
+                        <p class='testimonial-card__quote'>“입주 청소 후 사후 체크까지 도와주셔서 발견된 부분도 바로 수정해 주셨습니다.”</p>
+                        <p class='testimonial-card__meta'>윤** 고객 · 입주 청소</p>
                     </div>
                 </article>
             </div>
@@ -994,6 +1073,12 @@
                 <button type='button' class='testimonial-dot testimonial-dot--active' aria-label='첫 번째 후기 보기' data-slider-dot></button>
                 <button type='button' class='testimonial-dot' aria-label='두 번째 후기 보기' data-slider-dot></button>
                 <button type='button' class='testimonial-dot' aria-label='세 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='네 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='다섯 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='여섯 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='일곱 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='여덟 번째 후기 보기' data-slider-dot></button>
+                <button type='button' class='testimonial-dot' aria-label='아홉 번째 후기 보기' data-slider-dot></button>
             </div>
         </div>
     </section>
@@ -1012,17 +1097,12 @@
                 연락처
                 <input type='tel' name='inquiry-phone' placeholder='예: 010-1234-5678' autocomplete='tel' required>
             </label>
-            <label class='inquiry-form__item--email'>
-                이메일
-                <input type='email' name='inquiry-email' placeholder='연락 받으실 이메일(선택)' autocomplete='email'>
-            </label>
             <label class='inquiry-form__item--service'>
                 희망 서비스
                 <select name='inquiry-service'>
                     <option value='입주청소'>입주 청소</option>
-                    <option value='이사청소'>이사 청소</option>
-                    <option value='부분청소'>부분/부분 시공 청소</option>
-                    <option value='정기홈케어'>정기 홈케어</option>
+                    <option value='줄눈시공'>줄눈 시공</option>
+                    <option value='새집증후군'>새집증후군 케어</option>
                     <option value='기타' selected>기타 문의</option>
                 </select>
             </label>
@@ -1031,8 +1111,8 @@
                 <input type='date' name='inquiry-date'>
             </label>
             <label class='inquiry-form__item--area'>
-                지역
-                <input type='text' name='inquiry-area' placeholder='예: 서울 강남구' autocomplete='address-level2'>
+                주소
+                <input type='text' name='inquiry-address' placeholder='예: 서울특별시 강남구 테헤란로 123' autocomplete='street-address'>
             </label>
             <label class='inquiry-form__item--message'>
                 문의 내용
@@ -1043,6 +1123,22 @@
                 <button type='submit' class='inquiry-form__submit'>문의 접수하기</button>
             </div>
         </form>
+    </section>
+
+    <section class='cta' id='cta' data-reveal>
+        <h2 class='cta__title'>지금, 아빠가 청소하러 갑니다.</h2>
+        <p class='cta__subtitle'>전화 한 통이면 끝.</p>
+        <p class='cta__meta'>오늘 요청 → 내일 깨끗한 집.</p>
+        <ul class='cta__list'>
+            <li>친환경 세제 사용</li>
+            <li>전국 어디든 출동 가능</li>
+            <li>100% 책임 청소</li>
+            <li>하청 NO, 직영팀장 직접 방문</li>
+        </ul>
+        <div class='cta__buttons'>
+            <button class='cta__button cta__button--primary' data-action='quote' data-url='https://m.place.naver.com/place/1145477364/home?entry=pll'>무료 견적 받기</button>
+            <button class='cta__button cta__button--ghost' data-action='tel' data-tel='050713066398'>바로 전화 연결</button>
+        </div>
     </section>
 
     <footer class='site-footer' id='footer' data-reveal>
@@ -1075,25 +1171,8 @@
         </div>
     </footer>
 
-    <div class='sticky-contact' role='region' aria-label='문의하기 빠른 입력'>
-        <form class='sticky-contact__inner'>
-            <label>
-                이름
-                <input type='text' name='name' placeholder='이름을 입력하세요' autocomplete='name'>
-            </label>
-            <label>
-                연락처
-                <input type='tel' name='phone' placeholder='예: 010-1234-5678' autocomplete='tel'>
-            </label>
-            <label style='grid-column: span 2;'>
-                문의 내용
-                <textarea name='message' placeholder='요청 사항을 입력하세요'></textarea>
-            </label>
-            <button type='submit' class='sticky-contact__button'>문의하기</button>
-        </form>
-        <div class='sticky-contact__cta'>
-            <a href='#inquiry'>무료 견적 받기</a>
-        </div>
+    <div class='sticky-contact' role='region' aria-label='무료 견적 바로가기'>
+        <button type='button' class='sticky-contact__button' data-action='quote' data-url='https://m.place.naver.com/place/1145477364/home?entry=pll'>무료 견적 받기</button>
     </div>
 
     <div class='floating-quicklinks' aria-label='바로가기'>
@@ -1119,6 +1198,11 @@
             const sliderDots = document.querySelectorAll('[data-slider-dot]');
             let sliderIndex = 0;
             let sliderTimer = null;
+            const beforeAfterSlider = document.querySelector('[data-before-after-slider]');
+            const beforeAfterTrack = beforeAfterSlider ? beforeAfterSlider.querySelector('[data-before-after-track]') : null;
+            const beforeAfterSlides = beforeAfterTrack ? Array.from(beforeAfterTrack.children) : [];
+            let beforeAfterIndex = 0;
+            let beforeAfterTimer = null;
 
             function openMenu() {
                 if (!mobileNav) return;
@@ -1194,6 +1278,27 @@
                 });
             });
 
+            function updateBeforeAfter(index) {
+                if (!beforeAfterTrack || beforeAfterSlides.length === 0) return;
+                beforeAfterIndex = (index + beforeAfterSlides.length) % beforeAfterSlides.length;
+                beforeAfterTrack.style.transform = 'translateX(-' + beforeAfterIndex * 100 + '%)';
+            }
+
+            function stopBeforeAfter() {
+                if (beforeAfterTimer) {
+                    window.clearInterval(beforeAfterTimer);
+                    beforeAfterTimer = null;
+                }
+            }
+
+            function startBeforeAfter() {
+                if (beforeAfterSlides.length <= 1) return;
+                stopBeforeAfter();
+                beforeAfterTimer = window.setInterval(function () {
+                    updateBeforeAfter(beforeAfterIndex + 1);
+                }, 2300);
+            }
+
             function updateSlider(index) {
                 if (!sliderTrack || sliderSlides.length === 0) return;
                 sliderIndex = (index + sliderSlides.length) % sliderSlides.length;
@@ -1234,6 +1339,13 @@
                 startSlider();
             } else if (sliderSlides.length) {
                 updateSlider(0);
+            }
+
+            if (beforeAfterSlider && beforeAfterSlides.length) {
+                beforeAfterSlider.addEventListener('pointerenter', stopBeforeAfter);
+                beforeAfterSlider.addEventListener('pointerleave', startBeforeAfter);
+                updateBeforeAfter(0);
+                startBeforeAfter();
             }
 
             const scrollTopButton = document.querySelector('[data-scroll-top]');
