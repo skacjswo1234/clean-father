@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap 위치
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://papaclean.co.kr/sitemap.xml
 
 # 네이버 검색엔진
 User-agent: Yeti
