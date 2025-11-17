@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Sitemap 위치
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# 네이버 검색엔진
+User-agent: Yeti
+Allow: /
+
+# 구글 검색엔진
+User-agent: Googlebot
+Allow: /
+
+# 크롤링 속도 제한 (선택사항)
+Crawl-delay: 1
+
