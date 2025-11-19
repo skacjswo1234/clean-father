@@ -21,6 +21,23 @@ function doPost(e) {
       data.message || ''
     ]);
     
+    // 이메일 알림 발송
+    var emailRecipient = 'papaclean6398@gmail.com';
+    var emailSubject = '[청소하는아빠] 새로운 문의가 접수되었습니다.';
+    var emailBody = '새로운 문의가 접수되었습니다.\n\n' +
+                    '이름: ' + (data.name || '-') + '\n' +
+                    '연락처: ' + (data.phone || '-') + '\n' +
+                    '서비스: ' + (data.service || '-') + '\n' +
+                    '방문 희망일: ' + (data.date || '-') + '\n' +
+                    '주소: ' + (data.address || '-') + '\n' +
+                    '문의 내용:\n' + (data.message || '-');
+                    
+    MailApp.sendEmail({
+      to: emailRecipient,
+      subject: emailSubject,
+      body: emailBody
+    });
+    
     // 성공 응답
     return ContentService
       .createTextOutput(JSON.stringify({
