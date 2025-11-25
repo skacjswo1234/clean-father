@@ -137,7 +137,7 @@
       ]
     }
     </script>
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code - 직접 관리 -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -153,7 +153,25 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1597527301231663&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
+    <!-- End Meta Pixel Code - 직접 관리 -->
+    
+    <!-- Meta Pixel Code - 광고대행사 -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '820466180894760');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=820466180894760&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code - 광고대행사 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap' rel='stylesheet'>
@@ -1294,7 +1312,8 @@
             console.log('🔍 [Meta Pixel 초기화 확인]');
             if (typeof fbq !== 'undefined') {
                 console.log('✅ Meta Pixel (fbq) 로드 완료');
-                console.log('📊 Pixel ID: 1597527301231663');
+                console.log('📊 Pixel ID (직접 관리): 1597527301231663');
+                console.log('📊 Pixel ID (광고대행사): 820466180894760');
             } else {
                 console.warn('⚠️ Meta Pixel (fbq)가 아직 로드되지 않음');
             }
@@ -1528,7 +1547,8 @@
                     // Meta Pixel 초기화 확인
                     if (typeof fbq !== 'undefined') {
                         console.log('✅ [리드 전환 테스트] Meta Pixel (fbq) 초기화됨');
-                        console.log('📊 [리드 전환 테스트] Pixel ID:', '1597527301231663');
+                        console.log('📊 [리드 전환 테스트] Pixel ID (직접 관리): 1597527301231663');
+                        console.log('📊 [리드 전환 테스트] Pixel ID (광고대행사): 820466180894760');
                     } else {
                         console.warn('⚠️ [리드 전환 테스트] Meta Pixel (fbq)가 정의되지 않음');
                     }
@@ -1558,7 +1578,8 @@
                                 console.log('✅ [리드 전환 테스트] Lead 이벤트 전송 성공!');
                                 console.log('📊 [리드 전환 테스트] 이벤트 상세:', {
                                     event: 'Lead',
-                                    pixelId: '1597527301231663',
+                                    pixelIds: ['1597527301231663', '820466180894760'],
+                                    description: '두 Pixel 모두에 이벤트 전송됨',
                                     timestamp: new Date().toISOString()
                                 });
                             } catch (error) {
