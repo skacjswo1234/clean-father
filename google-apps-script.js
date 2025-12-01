@@ -10,11 +10,19 @@ function doPost(e) {
     // 현재 시간 추가
     var timestamp = new Date();
     
+    // 연락처를 텍스트로 변환 (앞의 0이 사라지지 않도록)
+    // 작은따옴표를 앞에 추가하여 구글 시트가 텍스트로 인식하도록 함
+    var phoneText = data.phone || '';
+    if (phoneText) {
+      // 앞에 작은따옴표를 추가하여 텍스트로 저장 (원본 형식 유지)
+      phoneText = "'" + phoneText;
+    }
+    
     // 시트에 데이터 추가
     sheet.appendRow([
       timestamp,
       data.name || '',
-      data.phone || '',
+      phoneText,
       data.service || '',
       data.date || '',
       data.address || '',
