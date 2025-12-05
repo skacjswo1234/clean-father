@@ -147,11 +147,11 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1597527301231663');
+    fbq('init', '820466180894760');
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1597527301231663&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=820466180894760&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1290,15 +1290,6 @@
 
     <script>
         (function () {
-            // Meta Pixel 초기화 상태 확인
-            console.log('🔍 [Meta Pixel 초기화 확인]');
-            if (typeof fbq !== 'undefined') {
-                console.log('✅ Meta Pixel (fbq) 로드 완료');
-                console.log('📊 Pixel ID: 1597527301231663');
-            } else {
-                console.warn('⚠️ Meta Pixel (fbq)가 아직 로드되지 않음');
-            }
-            
             const quoteButtons = document.querySelectorAll('[data-action=\"quote\"]');
             const telButtons = document.querySelectorAll('[data-action=\"tel\"]');
             const revealElements = document.querySelectorAll('[data-reveal]');
@@ -1525,14 +1516,6 @@
                     
                     console.log('📋 [리드 전환 테스트] 폼 데이터:', formData);
                     
-                    // Meta Pixel 초기화 확인
-                    if (typeof fbq !== 'undefined') {
-                        console.log('✅ [리드 전환 테스트] Meta Pixel (fbq) 초기화됨');
-                        console.log('📊 [리드 전환 테스트] Pixel ID:', '1597527301231663');
-                    } else {
-                        console.warn('⚠️ [리드 전환 테스트] Meta Pixel (fbq)가 정의되지 않음');
-                    }
-                    
                     // 버튼 비활성화
                     submitButton.disabled = true;
                     submitButton.textContent = '전송 중...';
@@ -1549,24 +1532,6 @@
                     })
                     .then(function() {
                         console.log('✅ [리드 전환 테스트] Google Sheets 전송 완료');
-                        
-                        // Meta Pixel 이벤트 발생 (문의 제출)
-                        if (typeof fbq !== 'undefined') {
-                            console.log('🎯 [리드 전환 테스트] Lead 이벤트 전송 시도...');
-                            try {
-                                fbq('track', 'Lead');
-                                console.log('✅ [리드 전환 테스트] Lead 이벤트 전송 성공!');
-                                console.log('📊 [리드 전환 테스트] 이벤트 상세:', {
-                                    event: 'Lead',
-                                    pixelId: '1597527301231663',
-                                    timestamp: new Date().toISOString()
-                                });
-                            } catch (error) {
-                                console.error('❌ [리드 전환 테스트] Lead 이벤트 전송 실패:', error);
-                            }
-                        } else {
-                            console.warn('⚠️ [리드 전환 테스트] fbq가 없어 Lead 이벤트를 전송할 수 없음');
-                        }
                         
                         // 성공 메시지
                         submitButton.textContent = '접수 완료!';
